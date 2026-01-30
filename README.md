@@ -1,63 +1,64 @@
 # 🤖 AI Multi-Translator: Azure, Google & Groq
-Este repositório foi desenvolvido para o Bootcamp de IA da DIO, focado em extração de conteúdo técnico de URLs e tradução de documentos. O projeto destaca-se pela versatilidade, utilizando três provedores de IA diferentes para contornar limitações de cota e explorar diferentes capacidades de processamento.
+
+Este repositório foi desenvolvido para o Bootcamp de IA da **DIO**.  
+O projeto foca na extração de conteúdo técnico de URLs e na tradução automatizada de documentos e artigos.
+
+O grande diferencial deste projeto é a sua **versatilidade**, integrando três provedores de IA diferentes para contornar limitações de cota e explorar o melhor de cada tecnologia.
 
 ## 📂 Estrutura do Repositório
 
-O projeto é composto por dois notebooks principais, cada um explorando uma abordagem de integração:
+O projeto é composto por dois notebooks principais com abordagens distintas:
 
-* **`dio-azure-openai.ipynb`**: Tradução de Artigos Técnicos (Web Scraping)
-Localizado no arquivo que utiliza Google Gemini e Groq. Este fluxo captura artigos do portal Dev.to, limpa o conteúdo e o traduz mantendo a formatação original. Google Gemini 1.5/2.0 Flash: Utilizado via SDK google-genai para traduções contextuais profundas. Groq (Llama-3.3-70b): Utilizado via langchain-groq para traduções ultra-rápidas. BeautifulSoup4: Responsável por extrair o texto limpo, removendo scripts e estilos HTML.
+### 1. `dio-azure-openai.ipynb`: Tradução de Artigos (Web Scraping)
 
-* **`dio-azure-translator.ipynb`**: Tradução de Documentos (Azure Translator)
-Localizado no notebook que utiliza os serviços cognitivos da Microsoft para processar arquivos locais.
+Originalmente planejado para Azure, este notebook foi adaptado para usar **Google Gemini** e **Groq** devido à disponibilidade de cotas gratuitas.
 
-Azure AI Translator: API oficial para tradução de textos com alta fidelidade.
+- **Fluxo**: Captura artigos de portais como Dev.to, limpa o HTML e traduz preservando a formatação original.
+- **Google Gemini 1.5/2.5 Flash**: Utilizado via SDK `google-genai` para traduções contextuais.
+- **Groq (Llama-3.3-70b)**: Utilizado via `langchain-groq` para processamento ultra-rápido.
+- **BeautifulSoup4**: Extração de texto limpo, removendo scripts e estilos desnecessários.
 
-Python-Docx: Utilizado para ler arquivos .docx, traduzir parágrafo por parágrafo e gerar um novo arquivo traduzido.
+### 2. `dio-azure-translator.ipynb`: Tradução de Documentos (Azure)
 
-## 🛠️ Tecnologias e Dependências
-Bash
-pip install -U google-genai langchain-groq beautifulsoup4 requests python-docx
+Focado no uso dos serviços cognitivos da Microsoft para processar arquivos locais.
 
-🔑 Configuração de Chaves
-Para rodar este projeto, você precisará configurar as seguintes variáveis:
-
-GOOGLE_API_KEY: Obtida no Google AI Studio.
-
-GROQ_API_KEY: Obtida no Groq Console.
-
-subscription_key (Azure): Obtida no portal do Azure para o serviço Translator.
-
-Este projeto demonstra a capacidade de integrar múltiplas nuvens e SDKs para resolver problemas reais de tradução e processamento de dados.
-
-Dica de mestre: No seu GitHub, lembre-se de que os notebooks salvam o estado da última execução. Como você usou o gemini-2.5-flash no código, certifique-se de que a biblioteca google-genai está na versão mais atual para evitar erros de modelo não encontrado!
+- **Azure AI Translator**: API oficial para tradução de textos com alta fidelidade.
+- **Python-Docx**: Biblioteca para manipulação de arquivos `.docx`, permitindo a tradução parágrafo por parágrafo e geração de um novo arquivo traduzido.
 
 ## 🚀 Como Começar
 
-### 1. Requisitos
-Instale as dependências necessárias no seu ambiente:
+### Instalação das Dependências
+
+Instale todos os pacotes necessários de uma só vez:
 
 ```bash
-pip install -U google-genai beautifulsoup4 requests
+pip install -U google-genai langchain-groq beautifulsoup4 requests python-docx
 ```
 
-2. Configuração de API
-Para rodar os notebooks, você precisará de uma chave de API do Google AI Studio. No código, configure sua chave como variável de ambiente ou diretamente no script:
+### Configuração de chaves
 
-Python
-import os
-os.environ["GOOGLE_API_KEY"] = "SUA_CHAVE_AQUI"
-3. Execução
-O fluxo principal do projeto segue estes passos:
+Para rodar os notebooks, você precisará configurar suas chaves de API.  
+No código, você pode definir como variáveis de ambiente ou diretamente nas variáveis:
 
-Extração: O script acessa a URL fornecida e remove tags HTML desnecessárias (scripts, menus, rodapés).
+- **GOOGLE_API_KEY**: Obtida no Google AI Studio.
+- **GROQ_API_KEY**: Obtida no Groq Console.
+- **subscription_key**: Obtida no portal do Azure para o serviço Translator.
 
-Processamento: O texto limpo é enviado para a IA.
+### Execução do Fluxo
 
-Tradução: O modelo (Gemini 1.5 Flash) traduz o conteúdo técnico respeitando o contexto e a formatação Markdown.
+- **Extração**: O script acessa a URL e remove tags desnecessárias (menus, rodapés).
+- **Processamento**: O texto limpo é enviado para a IA escolhida.
+- **Saída**: O conteúdo é entregue em Markdown (para artigos) ou em um novo arquivo `.docx` traduzido.
 
-⚠️ Observações sobre Limites de Cota (Rate Limit)
-Este projeto utiliza a camada gratuita da API do Gemini. Caso receba o erro 429 RESOURCE_EXHAUSTED, aguarde cerca de 60 segundos para que a cota de requisições por minuto seja resetada.
+## ⚠️ Observações sobre Limites (Rate Limit)
 
-Desenvolvido por [Seu Nome] durante o Bootcamp Microsoft Azure AI Fundamentals.
+Este projeto utiliza camadas gratuitas.  
+Caso receba o erro `429 RESOURCE_EXHAUSTED`, aguarde cerca de **60 segundos** para que a cota de requisições por minuto seja resetada pelos provedores.
 
+## 💡 Dica de mestre
+
+Certifique-se de que a biblioteca `google-genai` está na versão mais atual para evitar erros ao chamar o modelo **gemini-2.5-flash**.
+
+---
+
+Desenvolvido por **Franciso Rabelo** durante o *Bootcamp Microsoft Azure AI Fundamentals*.
