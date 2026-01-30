@@ -39,6 +39,7 @@ Instale as dependências necessárias no seu ambiente:
 
 ```bash
 pip install -U google-genai beautifulsoup4 requests
+```
 
 2. Configuração de API
 Para rodar os notebooks, você precisará de uma chave de API do Google AI Studio. No código, configure sua chave como variável de ambiente ou diretamente no script:
