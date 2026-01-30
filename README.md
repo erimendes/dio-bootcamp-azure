@@ -1,21 +1,36 @@
-# 🤖 AI Article Translator - DIO Bootcamp Azure
-
-Este repositório contém ferramentas de processamento de linguagem natural desenvolvidas para o Bootcamp de IA da [DIO](https://www.dio.me/). O projeto foca em extrair conteúdo técnico de URLs (como o Dev.to) e realizar traduções automáticas de alta qualidade utilizando serviços de IA de ponta.
+# 🤖 AI Multi-Translator: Azure, Google & Groq
+Este repositório foi desenvolvido para o Bootcamp de IA da DIO, focado em extração de conteúdo técnico de URLs e tradução de documentos. O projeto destaca-se pela versatilidade, utilizando três provedores de IA diferentes para contornar limitações de cota e explorar diferentes capacidades de processamento.
 
 ## 📂 Estrutura do Repositório
 
 O projeto é composto por dois notebooks principais, cada um explorando uma abordagem de integração:
 
-* **`dio-azure-openai.ipynb`**: Notebook principal que realiza o fluxo completo de *Web Scraping* e tradução. Originalmente desenvolvido para Azure OpenAI e adaptado para suportar o **Google Gemini 1.5 Flash**.
-* **`dio-azure-translator.ipynb`**: Exploração de serviços de tradução específicos e manipulação de textos para diferentes idiomas.
+* **`dio-azure-openai.ipynb`**: Tradução de Artigos Técnicos (Web Scraping)
+Localizado no arquivo que utiliza Google Gemini e Groq. Este fluxo captura artigos do portal Dev.to, limpa o conteúdo e o traduz mantendo a formatação original. Google Gemini 1.5/2.0 Flash: Utilizado via SDK google-genai para traduções contextuais profundas. Groq (Llama-3.3-70b): Utilizado via langchain-groq para traduções ultra-rápidas. BeautifulSoup4: Responsável por extrair o texto limpo, removendo scripts e estilos HTML.
 
-## 🛠️ Tecnologias e Bibliotecas
+* **`dio-azure-translator.ipynb`**: Tradução de Documentos (Azure Translator)
+Localizado no notebook que utiliza os serviços cognitivos da Microsoft para processar arquivos locais.
 
-* **Python 3.12**
-* **[Google GenAI SDK](https://github.com/google/generative-ai-python)**: Utilizado para a tradução com o modelo Gemini.
-* **BeautifulSoup4**: Para extração e limpeza de dados de páginas web.
-* **Requests**: Para requisições HTTP.
-* **Markdown**: Formato de saída para garantir que o artigo mantenha a legibilidade.
+Azure AI Translator: API oficial para tradução de textos com alta fidelidade.
+
+Python-Docx: Utilizado para ler arquivos .docx, traduzir parágrafo por parágrafo e gerar um novo arquivo traduzido.
+
+## 🛠️ Tecnologias e Dependências
+Bash
+pip install -U google-genai langchain-groq beautifulsoup4 requests python-docx
+
+🔑 Configuração de Chaves
+Para rodar este projeto, você precisará configurar as seguintes variáveis:
+
+GOOGLE_API_KEY: Obtida no Google AI Studio.
+
+GROQ_API_KEY: Obtida no Groq Console.
+
+subscription_key (Azure): Obtida no portal do Azure para o serviço Translator.
+
+Este projeto demonstra a capacidade de integrar múltiplas nuvens e SDKs para resolver problemas reais de tradução e processamento de dados.
+
+Dica de mestre: No seu GitHub, lembre-se de que os notebooks salvam o estado da última execução. Como você usou o gemini-2.5-flash no código, certifique-se de que a biblioteca google-genai está na versão mais atual para evitar erros de modelo não encontrado!
 
 ## 🚀 Como Começar
 
@@ -40,23 +55,8 @@ Processamento: O texto limpo é enviado para a IA.
 
 Tradução: O modelo (Gemini 1.5 Flash) traduz o conteúdo técnico respeitando o contexto e a formatação Markdown.
 
-📝 Exemplo de Uso
-Python
-url = '[https://dev.to/exemplo-de-artigo](https://dev.to/exemplo-de-artigo)'
-text = extract_text_from_url(url)
-article = translate_article(text, "pt-br")
-print(article)
 ⚠️ Observações sobre Limites de Cota (Rate Limit)
 Este projeto utiliza a camada gratuita da API do Gemini. Caso receba o erro 429 RESOURCE_EXHAUSTED, aguarde cerca de 60 segundos para que a cota de requisições por minuto seja resetada.
 
 Desenvolvido por [Seu Nome] durante o Bootcamp Microsoft Azure AI Fundamentals.
 
-
----
-
-### Dica para o seu GitHub:
-Para deixar o projeto ainda mais profissional, você pode criar um arquivo chamado `.gitignore` e escrever apenas isso dentro dele:
-```text
-.env
-__pycache__/
-.ipynb_checkpoints/
